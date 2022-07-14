@@ -1,0 +1,248 @@
+Q1. What is an interface ? 
+Q2. Why interface are called as contract ? 
+Q3. What are null interfaces ? 
+Q4. What are marker interfaces ? 
+Q5. Give some exampled for marker interfaces ? 
+@6. What is default method in interfaces ? 
+@7. Differences between interfaces and abstract class ?
+@8. Should abstract classes have abstract methods ? 
+@9. Is it possible to create object for abstract classes  ?
+@10. Do abstract classes have constructors ? 
+@11. If it is not possible to create an object for an abstract class, the why do they have constructors ?
+@12. When to use interfaces ?
+@13. When to use abstract classes ?
+@14. Can a class have only private constructors ?
+@15. How to create objects for classes with private constructors ?
+@16. What is de-coupling ?
+@17. What is cohesiveness  between object?
+@18. Explain "has-a" and "is-a" relationship between objects with examples  ?
+@19. What do you mean by single Responsibility Principle ? 
+@20. What is Dependency Injection/ Inversion of Control (DI/ IOC) ? 
+
+
+
+================================================================================================================================
+
+1.  What is an interface ? 
+
+	Interface has a method , we can implement by a new class, who ever can implement the interface methods.
+	Interface method also called abstract method  that is used to describe a behaviour that classes must implement. 
+	Interfaces are declared using the interface keyword.
+	
+2. Why interface are called as contract ? 
+     *Interface are contracts between implementers and consumers.
+	 *If your class claims to implement an interface, all methods defined by that interface must appear in its source
+	 code before the class will successfully compile. so it is called as contract. 
+	 * The contract is a promise, a class that implements an interface its makes a promise , that it will realize(override) the abstract methods of the interface.
+	 * The user of the class to know the list of services provided by object of the class, can check all the interface implemented by the class.
+	 
+3.  What are null interfaces ? 
+	
+	Without any methods in interface is called  as null interface and also called as Marker Interface.
+	
+4.	What are marker interfaces ?
+    *Marker interface are very special interfaces, object of classes that implement these interfaces are treated us a    special way by the JVM.
+	*A marker interface is an interface that has may or mayn't contain  methods or constants inside it.
+	It provides run-time type information about objects, so the compiler and JVM have additional information about the object.
+    All null interfaces are marker.
+    But all markers are not null interfaces.	
+
+5. 	Give some exampled for marker interfaces ? 
+
+	A marker interface is an interface that has no methods or constants inside it. It provides run-time type information about objects, so the compiler and JVM have additional information about the object.
+	ex:-   java.io.Serializable, java.lang.Cloneable and java.rmi.Remote , javax.servlet.Servlet (it has a methods)interface.
+
+6.  What is default method in interfaces ? 
+
+	Use of default methods in interfaces is to provide additional functionality to a given type without breaking down the implementing classes.
+	Defaule methods are not abstract methods.(they are concrete methods)
+	
+	ex: public interface Vehicle {
+
+		void cleanVehicle();
+
+		default void startVehicle() {
+        System.out.println("Vehicle is starting");
+		}
+		}
+
+7.	Differences between interfaces and abstract class ?
+
+	Abstract class;
+	  The abstract keyword is used to declare abstract class.An abstract class can extend another Java class and implement multiple Java interfaces.
+	  
+	Interface:
+	  Interface can have only abstract methods.The interface keyword is used to declare interface.
+	  all the methods in the interface have to be implement in to the class.
+
+          Interfaces:
+	  -Has no concrete method(exception default methods)
+	  -Has no constructors
+	  -A class can implement multiple interfaces
+	  -Implementer class is instantiated, interface is not instantiated
+	  
+	  Abstract Class:
+	  -Has concrete method  
+	  -Has constructors
+	  -extend from one base class (or) one abstract class
+	  -child class is instantiated and then parent class is also instantiated
+	  
+
+8.  Should abstract classes have abstract methods ? 
+
+	It’s not necessary for an abstract class to have abstract method. We can mark a class as abstract even if it doesn’t declare any abstract methods.
+	
+9.  Is it possible to create object for abstract classes  ?
+
+	We cannot create objects of an abstract class. To implement features of an abstract class, we inherit subclasses from it and create objects of the subclass. 
+	The reference of the parent object is available to the child through the super reference.
+
+10.	Do abstract classes have constructors ? 
+
+     abstract classes can have constructors even when they are only called from their concrete subclasses.
+	 ex:-  public abstract class AbstractClass {
+    public AbstractClass() {
+        System.out.println("Initializing AbstractClass");
+		}
+		}
+	
+11.	If it is not possible to create an object for an abstract class, the why do they have constructors ?
+
+	The constructor of abstract class will be used to initialize any object of this class whenever an object of its subclass is initialized.
+	The constructor of the abstract class is invoked, before running the constructor of the sub class.
+
+12. When to use interfaces ?
+    * Interface are used as abstractions of the implementing classes.
+	* Java does not support "multiple inheritance" (a class can only inherit from one superclass). However, it can be achieved with interfaces, because the class can implement multiple interfaces.
+	To achieve security - hide certain details and only show the important details of an object.
+	
+13. When to use abstract classes ?
+	
+	if you want to provide a common, implemented functionality among all the implementations of the Interface. Abstract classes will allow you to partially implement your class.
+	
+14.	 Can a class have only private constructors ?
+
+	*Yes, we can declare a constructor as private. If we declare a constructor as private we are not able to create an object directly in the outside of a class.
+		
+15.  How to create objects for classes with private constructors ?
+
+	 We can use this private constructor in the "Singleton Design Pattern" to create a object in the outside of class.
+	ex :-
+	     
+		class SingletonObject {
+		private SingletonObject() {
+		System.out.println("In a private constructor");
+		}
+		public static SingletonObject getObject() {
+		
+
+		  return ref = new SingletonObject();
+		}
+		
+		public class PrivateConstructorDemo {
+		public static void main(String args[]) {
+		SingletonObject sObj = SingletonObject.getObject();
+		System.out.println(sObj);
+		}
+		}
+	source(https://www.tutorialspoint.com/can-we-declare-a-constructor-as-private-in-java)
+	
+	A factory method is a static method that creates anew object  and returns it.
+	Refer ScoreBoard.java createObject() method.
+	Private constructors cannot be called from outside the class but another method from within the same class.
+	The factory method is implemented in the class that has the private constructors.
+	so the factory method can call the private constructor.
+	To call the factory method from outside the class without an object reference the factory method  must be static.
+	
+16.	 What is de-coupling ?
+17.	 What is cohesiveness  between object?
+
+	A class is designed with a single, well-focused purpose.The advantage of high cohesion is that such classes are much easier to maintain (and less frequently changed) than classes with low cohesion.
+		*low cohesion only one class is responsible to execute lots of jobs that are not in common which reduces the chance of reusability and maintenance. But in high cohesion, there is a separate class for all the jobs to execute a specific job, which results in better usability and maintenance.*
+	
+	source(https://www.geeksforgeeks.org/cohesion-in-java/#:~:text=Cohesion%20in%20Java%20is%20the,the%20cohesiveness%20of%20that%20class.)
+	
+18.	Explain "has-a" and "is-a" relationship between objects with examples  ?
+
+19.    Mehod overload ?
+          A  class has same method but parameter are different.
+
+20.   Runtime polimorphsim ?
+
+      public class Baseclass { public void doAtask()
+       {
+     // implement a logic here
+     public class ChildClass extends Baseclass { public void doAtask()
+    {
+    // implement with a different logic here
+     }
+     public class ServiceControl
+     public void doSomeOperation (Baseclass obj)
+    {  
+           obj.doAtask();
+    }
+     public class TestOverriding
+     ps v main (...) 
+    {
+    ServiceControl sc =new ServiceControl ();
+    Baseclass bc = new Baseclass();
+    ChildClass cc = new ChildClass();
+     sc.doSomeOperation (cc); // child.doAtask()
+      sc.doSomeOperation (bc); // BaseClass.doAtask()
+
+21. If the class without a default constructor ?
+     if the base does not contains default construcor every constrictor in child it should exiplicity call base class constructor from the child class
+ using SUPER keyword.
+    ex:-
+        
+      public class Game(){
+      private int duration;
+     public  Game (int time){
+         duration=time; } 
+      public void startPlaying ()
+      System.out.println("Game started");
+     }
+       }
+      class VideoGame extends Game
+      public VideoGame () 
+      public VideoGame (int time)
+     {
+      super(0);
+      }
+     super (time);
+    }
+   }
+
+22.  Final Class :
+       can't be inherited.
+    Final Method :
+      can't be overriden.
+   Final field :
+      If a field is declared as final its value can’t be changed once assigned.
+
+23.  Difference between final and static final :
+    
+         public class TestFinal {
+        private final int dataA; // read only field
+        private static final int dataB-123; // constant 
+       public TestFinal (int x){
+         // Value can be assigned through the constructor
+      dataA=x;
+       }
+       public String toString(){
+        return dataA+" "+ dataB;
+       }
+        }
+        Main java XTestFinal.java
+  
+   public class Main {
+
+     public static void main(String[] args) {
+
+    TestFinal tf_one-new Test Final (100);
+
+     TestFinal tf_two-new TestFinal (500); System.out.println(tf_one.toString());
+
+         System.out.println(tf two.toString());
+       }
+
